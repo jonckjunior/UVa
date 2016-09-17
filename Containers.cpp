@@ -24,22 +24,6 @@ typedef pair<int,vvi> ivvi;
 vi dist;
 vvi inicio(2,vi(4)), fim(2,vi(4));
 vvii g(50000);
-
-struct pos{
-    int i00,i01,i02,i03,i10,i11,i12,i13;
-    pos(){}
-    pos(vvi &a){
-        i00 = a[0][0];
-        i01 = a[0][1];
-        i02 = a[0][2];
-        i03 = a[0][3];
-        i10 = a[1][0];
-        i11 = a[1][2];
-        i12 = a[1][3];
-        i13 = a[1][4];
-    }
-};
-
 map<vvi, int> mapa;
 int k = 1;
 

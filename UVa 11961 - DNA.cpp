@@ -28,18 +28,17 @@ typedef pair<int,vvi> ivvi;
 int n,k;
 char comb[] = "ACGT";
 vector<string> vs;
-void backtrack(int i, string s, int m, map<string,bool> &used){
-    if(i >= n){
-        if(m==k && used[s] == 0)
-            vs.push_back(s),used[s] = 1;
-        return;
-    }
-    backtrack(i+1,s,m,used);
+void backtrack(int i, string s, int m){
+    if(m > k) return;
+    if(i == n){vs.push_back(s);return;}
     char aux;
     for(int j = 0; j < 4; j++){
         aux = s[i];
         s[i] = comb[j];
-        backtrack(i+1,s,m+1,used);
+        if(aux == comb[j])
+            backtrack(i+1,s,m);
+        else
+            backtrack(i+1,s,m+1);
         s[i] = aux;
     }
 }
@@ -52,11 +51,7 @@ int main(){
         scanf("%d %d",&n,&k);
         cin >> s;
         vs.clear();
-        //vs.push_back(s);
-        //for(int i = 0; i < n; i++)
-        map<string,bool> used;
-        backtrack(0,s,0, used);
-        sort(vs.begin(), vs.end());
+        backtrack(0,s,0);
         cout << vs.size() << endl;
         for(int i = 0; i < vs.size(); i++)
             cout << vs[i] << endl;

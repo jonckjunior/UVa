@@ -16,10 +16,10 @@ typedef vector<ii> vii;
 string original;
 char last;
 
-void backtrack(vector<char> &s, int u, map<vector<char>,bool> &used){
-    if(used[s] || u > original.size()) return;
+void backtrack(vector<char> &s, int u){
+    if(u > original.size()) return;
     if(u == original.size()-1){
-        used[s] = true;
+       // used[s] = true;
         for(int i = 0; i < s.size(); i++)
             cout << s[i];
         cout << endl;
@@ -27,11 +27,11 @@ void backtrack(vector<char> &s, int u, map<vector<char>,bool> &used){
     }
     for(int i = 0; i < s.size(); i++){
         s.insert(s.begin()+i,original[u+1]);
-        backtrack(s,u+1,used);
+        backtrack(s,u+1);
         s.erase(s.begin()+i);
     }
     s.push_back(original[u+1]);
-    backtrack(s,u+1,used);
+    backtrack(s,u+1);
     s.pop_back();
 }
 
@@ -39,10 +39,9 @@ int main(){
     bool espaco = false;
     while(cin >> original){
         if(espaco) cout << endl;
-        map<vector<char>,bool> used;
         vector<char> vc;
         vc.push_back(original[0]);
-        backtrack(vc,0,used);
+        backtrack(vc,0);
         espaco = true;
     }    
     

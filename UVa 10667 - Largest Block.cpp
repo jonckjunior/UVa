@@ -30,7 +30,7 @@ int main(){
                 if(subRect < 0) subRect = 0;
                 else maxRect = max(maxRect, subRect);
             }
-            }
+        }
         cout << maxRect << endl;
     }
 

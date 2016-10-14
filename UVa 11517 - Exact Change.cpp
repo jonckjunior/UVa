@@ -15,7 +15,7 @@ ii solve(int id, int change, int nc){
     if(change >= price)         return ii(change,nc);
     if(id == n)                 return ii(INF,INF);
     ii &value = DP[id][change];
-    if(value != ii(-1,-1) )     return ii(value.first, value.second + nc);
+    if(value != ii(-1,-1) )     return value;
     return value = min(solve(id+1,change,nc), solve(id+1,change + numcoin[id], nc+1));
 } 
 

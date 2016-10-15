@@ -1,11 +1,4 @@
 #include <bits/stdc++.h>
-#define INF 1e9
-#define MAX_N 30
-#define bit(i) (1<<i)
-using namespace std;
-typedef pair<int,int> ii;
-typedef vector<int> vi;
-typedef vector<ii> vii;
 
 long long int n,k,m, DP[55][55][55];
 

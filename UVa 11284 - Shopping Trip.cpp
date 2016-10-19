@@ -11,7 +11,6 @@ int v,e, n, lojas[55];
 double g[55][55], preco[55], grafo[20][20], DP[20][100000];
 
 double solve(int u, int mark){
-    //printf("%d %d\n",u,mark );
     if(bit(n+1)-1 == mark) return -grafo[u][0];
     double &value = DP[u][mark];
     if(value != -1) return value;
@@ -55,13 +54,9 @@ int main(){
                 int v = lojas[j];
                 grafo[i][j] = g[u][v];
             }
-        }
-        /*for(int i = 0; i <= n; i++)
-            for(int j = 0; j<= n; j++)
-                printf("grafo[%d][%d] = %.2lf\n",i,j,grafo[i][j]);*/
+        }       
         for(int i = 0; i <= n; i++) for(int j = 0; j <= 100000; j++) DP[i][j] = -1;
         double ans = solve(0,1);
-        //cout << ans << endl;
         if(abs(ans) <= 1e-7) printf("Don't leave the house\n");
         else if(ans < 0)     printf("Don't leave the house\n");
         else                 printf("Daniel can save $%.2lf\n",ans);

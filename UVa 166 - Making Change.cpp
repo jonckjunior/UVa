@@ -30,7 +30,6 @@ long long int solve(int id, int sum, int nc, int ct){
 }
 
 int main(){
-    ios::sync_with_stdio(false);
     while(cin >> qt[0]>> qt[1]>> qt[2]>> qt[3]>> qt[4]>> qt[5] && qt[0]+qt[1]+qt[2]+qt[3]+qt[4]+qt[5] != 0){
         cin >> aux;
         res = aux*100;

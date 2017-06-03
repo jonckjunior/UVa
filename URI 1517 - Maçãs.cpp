@@ -2,9 +2,9 @@
 // Foi usado uma abordagem de programação dinâmica com busca em profundidade, pois há recomputação de estados
 // Os estados podem ser vistos como nodos de um grafo e a função solve percorre esse grafo
 //      para encontrar o "maior/melhor caminho" (bem similiar a um floodfill na minha opinião)
-//      complexidade de Tempo O(nmt) onde n e m são as dimensões da matriz e t é o tempo máximo que uma maçã pode cair
+// Complexidade de Tempo O(nmt) onde n e m são as dimensões da matriz e t é o tempo máximo que uma maçã pode cair
 //      pois percorre todos os estados possíveis (matriz DP) e devolve a melhor solução
-// Como a matriz DP tem dimensões NxMxT logo, deve percorrer os NxMxT estados
+//      como a matriz DP tem dimensões NxMxT logo, deve percorrer os NxMxT estados
 // Complexidade de Espaço O(nmt) pois utiliza a matriz DP para evitar recomputação de estados
 // A complexidade de tempo para uma versão sem programação dinâmica, vide, a tabela dinâmica (ha)
 //      Seria O(2^t), onte t é o tempo máximo

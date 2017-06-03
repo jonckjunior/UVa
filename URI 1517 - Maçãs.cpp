@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 // Foi usado uma abordagem de programação dinâmica com busca em profundidade, pois há recomputação de estados
-// Os estados podem ser vistos como nodos de um grafo e a função percorre esse grafo
+// Os estados podem ser vistos como nodos de um grafo e a função solve percorre esse grafo
 //      para encontrar o "maior/melhor caminho" (bem similiar a um floodfill na minha opinião)
 // Complexidade de Tempo O(nmt) onde n e m são as dimensões da matriz e t é o tempo máximo que uma maçã pode cair
 //      pois percorre todos os estados possíveis (matriz DP) e devolve a melhor solução
@@ -9,6 +9,12 @@
 // A complexidade de tempo para uma versão sem programação dinâmica, vide, a tabela dinâmica (ha)
 //      Seria O(2^t), onte t é o tempo máximo
 //      Como cada estado cria 4 sub-estados e isso ocorre até alcançar o tempo máximo temos 4^t, logo, O(4^t) = O(2^t)
+//Já a complexidade de espaço para uma versão sem programação dinâmica, seria O(t) que é a profundidade de um galho,
+//      ou seja, o número máximo de vezes que a função solve será empilhada
+
+// Retire o código comentado abaixo para transformar a abordagem com programação dinâmica
+//      em uma abordagem de busca completa (Brute Force)
+// *Não tente fazer isso em casa
 using namespace std;
 int const max_v = 30, max_t = 1005;
 
@@ -22,8 +28,8 @@ bool valid(int x, int y, int t){
 }
 
 int solve(int x, int y, int t){
-    int &value = DP[x][y][t];
-    if(value != -1) return value;
+    int &value = DP[x][y][t]; // Retire aqui
+    if(value != -1) return value; // Retire aqui
     int ans = 0;
 
     for(int i = -1; i <= 1; i++){
@@ -35,7 +41,7 @@ int solve(int x, int y, int t){
         }
     }
 
-    return value = ans + res[x][y][t];
+    return value = ans + res[x][y][t]; // Retire aqui e troque por: return ans + res[x][y][t];
 }
 
 int main(){

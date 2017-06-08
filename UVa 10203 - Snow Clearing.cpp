@@ -4,8 +4,6 @@ using namespace std;
 typedef pair<int,int> ii;
 typedef vector<int> vi;
 typedef vector<ii> vii;
-vector<vii> adj;
-int numedge;
 map<pair<int,int>, int> m;
 int const max_v = 150;
 
@@ -23,7 +21,6 @@ int main(){
 	while(t--){
 		m.clear();
 		k = 1;
-		adj.assign(max_v, vii());
 		dist_total = 0;
 		int primeiro = 1;
 		while(getline(cin, entrada) && entrada.size() > 0){

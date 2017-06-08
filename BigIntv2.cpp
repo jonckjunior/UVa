@@ -78,10 +78,16 @@ BigInt addBigInt(BigInt a, BigInt b){
 BigInt MulBigInt(BigInt a, BigInt b){
 	BigInt novoBig;
 	int rem = 0, soma = 0;
+	reverse(a.begin(), a.end());
+	reverse(b.begin(), b.end());
 	vector<BigInt> rs;
 	for(int i = 0; i < b.size(); i++){
+		novoBig = "";
+		rem = 0;
 		for(int j = 0; j < a.size(); j++){
+			printf("fazendo %c %c\n",b[i],a[j]);
 			soma = (a[j]-'0')*(b[i]-'0') + rem;
+			printf("soma %d e rem era = %d\n",soma,rem);
 			if(soma>9){
 				novoBig.push_back((soma%10)+'0');
 				rem = soma/10;
@@ -90,12 +96,13 @@ BigInt MulBigInt(BigInt a, BigInt b){
 				novoBig.push_back(soma+'0');
 				rem = 0;
 			}
+			cout << novoBig << endl;
 		}
+		if(rem) novoBig.push_back(rem+'0');
+		reverse(novoBig.begin(), novoBig.end());
 		for(int k = 0; k < i; k++)
 			novoBig.push_back('0');
 		cout << "somou " << novoBig << endl;
-		if(rem) novoBig.push_back(rem+'0');
-		reverse(novoBig.begin(), novoBig.end());
 		rs.push_back(novoBig);
 	}
 	novoBig = "0";

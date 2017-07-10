@@ -2,114 +2,54 @@
 
 using namespace std;
 
-pair<char,char> mt[4][4];
-
-int getNum(char c){
-    if(c == 'V') return 0;
-    if(c == 'U') return 1;
-    if(c == 'C') return 2;
-    if(c == 'D') return 3;
+int Pow(int x, int y) {
+    if(y == 0)
+        return 1;
+    if(y&1)
+        return x*Pow(x*x, y/2);
+    else
+        return Pow(x*x, y/2);
 }
 
-string solve(string n1, string n2, char op){
-    if(op == 'N') return n2;
-    else if(op == 'A'){
-        string mini, maxi,res="";
-        if(n1.size() < n2.size()) mini = n1, maxi = n2;
-        else                      mini = n2, maxi = n1;
-        char carry = 'N';
-        for(int i = 0; i < mini.size(); i++){
-            int v1 = getNum(mini[mini.size()-1-i]);
-            int v2 = getNum(maxi[maxi.size()-1-i]);
-            //printf("analisando %c e %c\n",mini[mini.size()-1-i],maxi[maxi.size()-1-i]);
-            pair<char,char> res1 = mt[v1][v2];
-            //printf("<%c,%c>\n",res1.first,res1.second);
-            if(carry == 'N'){
-                carry = res1.second;
-                res += res1.first;
-            }
-            else if(res1.second == 'N'){
-                int vc = getNum(carry);
-                pair<char,char> res2 = mt[vc][getNum(res1.first)];
-                carry = res2.second;
-                res += res2.first;
-            }
-            else if(res1.second != 'N'){
-                int vc = getNum(carry);
-                pair<char,char> res2 = mt[vc][getNum(res1.first)];
-                carry = res1.second;
-                res += res2.first;
-            }
-            //printf("foi adicionado %c na resposta com carry %c\n",res[res.size()-1],carry);
-        }
-        if(mini.size() == maxi.size())
-            if(carry != 'N') res += carry;
-        else{
-            for(int i = mini.size(); i < maxi.size(); i++){
-                if(carry == 'N') break;
-                int v1 = getNum(carry);
-                int v2 = getNum(maxi[i]);
-                pair<char,char> ans = mt[v1][v2];
-                res += ans.first;
-                carry = ans.second;
-            }
-        }
-        reverse(res.begin(), res.end());
-        return res;
+int solve(string s){
+    int res = 0;
+    for(int i = s.size()-1, k = 0; i >= 0; i--, k++){
+        int v;
+        if(s[i] == 'V') v = 0;
+        else if(s[i] == 'U') v = 1;
+        else if(s[i] == 'C') v = 2;
+        else if(s[i] == 'D') v = 3;
+        res += v*Pow(4,k);
     }
-    else if(op == 'R'){
-        string res = "V";
-        n2.pop_back();
-        res += n2;
-        return res;
-    }
-    else if(op == 'L'){
-        n2 += "V";
-        return n2;
-    }
+    return res;
 }
+
+int calc(int n1, int n2, char op){
+    if(op == 'L') return n2 *= 4;
+    else if(op == 'R') return n2 /= 4;
+    else if(op == 'A') return n1+n2;
+    else return n2;
+}
+
 
 int main(){
-    
-    mt[0][0] = make_pair('V','N');
-    mt[0][1] = make_pair('U','N');
-    mt[0][2] = make_pair('C','N');
-    mt[0][3] = make_pair('D','N');
-    mt[1][0] = make_pair('U','N');
-    mt[1][1] = make_pair('C','N');
-    mt[1][2] = make_pair('D','N');
-    mt[1][3] = make_pair('V','U');
-    mt[2][0] = make_pair('C','N');
-    mt[2][1] = make_pair('D','N');
-    mt[2][2] = make_pair('V','U');
-    mt[2][3] = make_pair('U','U');
-    mt[3][0] = make_pair('D','N');
-    mt[3][1] = make_pair('V','U');
-    mt[3][2] = make_pair('U','U');
-    mt[3][3] = make_pair('C','U');
-    
     int t;
-    char op1,op2,op3;
     cin >> t;
     printf("COWCULATIONS OUTPUT\n");
     while(t--){
-        string num1,num2,res;
-        cin >> num1 >> num2;
+        string s1,s2,final;
+        char op1,op2,op3;
+        cin >> s1 >> s2;
         cin >> op1 >> op2 >> op3;
-        cin >> res;
-
-        num2 = solve(num1,num2,op1);
-
-        num2 = solve(num1,num2,op2);
-
-        num2 = solve(num1,num2,op3);
-
-        string aux = "";
-        for(int i = num2.size(); i < 8; i++) aux += 'V';
-        num2 = aux + num2;
-        if(num2 == res) printf("YES\n");
-        
-        else            printf("NO\n");
+        cin >> final;
+        int n1 = solve(s1);
+        int n2 = solve(s2);
+        int res = solve(final);
+        n2 = calc(n1,n2,op1);
+        n2 = calc(n1,n2,op2);
+        n2 = calc(n1,n2,op3);
+        if(n2 == res) printf("YES\n");
+        else          printf("NO\n");
     }
     printf("END OF OUTPUT\n");
 }

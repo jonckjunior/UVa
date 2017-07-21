@@ -10,10 +10,7 @@ int solve(int n, int m){
         res = (( (res%p) * (i%p)));
         while(res%10 == 0 && res > 0) res/=10;
     }
-    string s_res = to_string(res);
-    reverse(s_res.begin(), s_res.end());
-    for(int i = 0; i < s_res.size(); i++)
-        if(s_res[i] != '0') return (s_res[i]-'0');
+    return res%10;
 }
 
 int main() {

@@ -6,7 +6,7 @@ typedef pair<int,int> ii;
 typedef vector<ii> vii;
 int const maxn = 2000000;
 vi p;
-ll bt[maxn+5], sum[maxn+5], dp[maxn+5];
+ll bt[maxn+5],dp[maxn+5],sum[maxn+5];
 
 ll solve(int n){
     if(n==1) return 0;
@@ -21,6 +21,12 @@ void sieve(){
         if(bt[i] == i)
             for(ll j = i ; j <= maxn; j+=i)
                 bt[j] = (bt[j]/i) * (i-1);
+    sum[1] = 0;
+    for(ll i = 2; i <= maxn; i++){
+        ll ans = solve(i);
+        sum[i] = sum[i-1] + ans;
+    }
+
 }
 
 
@@ -31,12 +37,7 @@ int main() {
     scanf("%d",&t);
     while(t--){
         scanf("%d %d",&m,&n);
-        long long int sum = 0;
-        for(int i = m; i <= n; i++){
-            ll ans = solve(i);
-            sum += ans;
-        }
-        printf("%lld\n",sum);
+        printf("%lld\n",sum[n]-sum[m]+dp[m]);
     }
     return 0;
 }

@@ -3,7 +3,6 @@ using namespace std;
 #define bit(i) (1<<(i))
 
 int adj[25][25], aux[25], tempo[25], n, maxnodo, maxtempo=420, found, res;
-int dp[20][bit(20)];
 void solve(int u, int mask, int w, int nodos){
 	res = max(res, nodos);
 	if(nodos == maxnodo){found=true;return;}
@@ -39,7 +38,6 @@ int main(){
 					adj[i][j] = min(adj[i][j], adj[i][k] + adj[k][j]);
 		found = false;
 		res = 0;
-		memset(dp, -1, sizeof dp);
 		for(int i = 0; i < n && !found; i++)
 			if(tempo[i] <= maxtempo)
 				solve(i, bit(i), tempo[i], 1);

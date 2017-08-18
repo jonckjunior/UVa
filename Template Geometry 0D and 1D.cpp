@@ -112,29 +112,3 @@ bool ccw(point p, point q, point r) {
 bool collinear(point p, point q, point r) {
 	return fabs(cross(toVec(p, q), toVec(p, r))) < EPS;
 }
-
-vector<point> vp;
-
-int main(){
-	int n;
-	double x,y;
-	while(cin >> x >> y >> n){
-		point p(x,y);
-		vp.clear();
-		for(int i = 0; i < n+1; i++){
-			cin >> x >> y;
-			vp.push_back(point(x,y));
-		}
-		double res = 1e9;
-		point pres, aux;
-		for(int i = 0; i < n; i++){
-			double d = distToLineSegment(p, vp[i], vp[i+1], aux);
-			if(d < res){
-				res = d;
-				pres = aux;
-			}
-		}
-		printf("%.4f\n",pres.x);
-		printf("%.4f\n",pres.y);
-	}
-}
